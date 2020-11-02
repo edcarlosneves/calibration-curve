@@ -1,0 +1,94 @@
+{% extends "base_generic.html" %}
+{% load static %}
+{% block title %}
+    <title>Calibration Curve - Report</title>
+{% endblock %}
+
+{% block content %}
+    <div class="text-center">
+        <h3>Calibration Curve - Report</h3>
+        <h5>Analyst: Edcarlos Neves</h5> <img
+            src="https://avatars1.githubusercontent.com/u/12738305?s=460&u=7d429fbbf0c4c289fb4a469a680a6a51dd49fb5f&v=4"
+            class="rounded-circle z-depth-0"
+            alt="avatar image" style="height: 30px;">
+    </div>
+
+    <div class="form-row align-items-center mt-5">
+
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-4">
+                    <a class="btn btn-primary mb-0" href="javascript:history.back()"><i class="fas fa-pen-square"></i> Edit</a>
+                </div>
+                <div class="col-md-4">
+                    <a class="btn btn-primary mb-0"><i class="fas fa-file-pdf"></i> PDF</a>
+                </div>
+                <div class="col-md-4">
+                    <a class="btn btn-primary mb-0"><i class="fas fa-share"></i> Send to...</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="report-boxes mt-5">
+        <h5><span class="font-weight-bold text-info"><i
+                class="fas fa-clipboard-list"></i> Analysis Name:</span> {{ analysis_name }}</h5>
+    </div>
+
+    <div class="report-boxes mt-5">
+        <h5><span class="font-weight-bold text-info"><i
+                class="fas fa-clipboard-list"></i> Substance:</span> {{ substance_name }}</h5>
+    </div>
+
+    <div class="row">
+        <div class="col-md-5">
+            <div class="report-boxes mt-5">
+                <h5><span class="font-weight-bold text-info"><i
+                        class="fas fa-clipboard-list"></i> Input data</span>
+                </h5>
+
+                <div class="row mt-5">
+                    <div class="col-md-3">
+
+                    </div>
+                    <div class="col-md-6 text-center">
+                        <table class="table table-dark">
+                            <thead>
+                            <tr>
+                                <th scope="col">Absorbance</th>
+                                <th scope="col">Concentration (mg/L)</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for elem in absorbance_concentration %}
+                                <tr>
+                                    <td>{{ elem.0 }}</td>
+                                    <td>{{ elem.1 }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-3">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-7">
+            <div class="report-boxes mt-5 mb-5">
+                <h5><span class="font-weight-bold text-info"><i class="fas fa-clipboard-list"></i> Output chart</span>
+                </h5>
+                <div class="text-center">
+                    <img src="{% static 'img/report/analysis.png' %} " alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+{% endblock %}

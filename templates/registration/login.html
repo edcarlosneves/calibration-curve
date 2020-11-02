@@ -1,0 +1,45 @@
+{% extends "base_generic.html" %}
+{% load widget_tweaks %}
+{% block content %}
+
+    {% if form.errors %}
+        <p>Seu usuário e senha estão incorretos. Por favor, tente novamente!</p>
+    {% endif %}
+
+    {% if next %}
+        {% if user.is_authenticated %}
+            <p>Sua conta não tem acesso a essa página.</p>
+        {% else %}
+            <p>Por favor, faça login para ver essa página.</p>
+        {% endif %}
+    {% endif %}
+
+
+    <div class="report-boxes" style="max-width: 60%; margin:0 auto;">
+        <form method="post" action="{% url 'login' %}" class="mb-5">
+            {% csrf_token %}
+
+            <div class="form-row align-items-center mt-3">
+                <div class="col-md-6 offset-md-3">
+                    <label for="{{ form.username.id_for_label }}">Username</label>
+                    {% render_field form.username class="form-control" %}
+                </div>
+            </div>
+
+            <div class="form-row align-items-center mt-3">
+                <div class="col-md-6 offset-md-3">
+                    <label for="{{ form.password.id_for_label }}">Password</label>
+                    {% render_field form.password class="form-control" %}
+                </div>
+            </div>
+
+            <div class="form-row text-right mt-3">
+                <div class="col-md-6 offset-md-3">
+                    <input type="submit" class="btn btn-primary mb-0" value="Login">
+                </div>
+            </div>
+            <input type="hidden" name="next" value="{{ next }}"/>
+        </form>
+    </div>
+
+{% endblock %}

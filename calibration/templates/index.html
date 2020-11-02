@@ -1,0 +1,30 @@
+{% extends "base_generic.html" %}
+{% load widget_tweaks %}
+{% block title %}
+    <title>Calibration Curve</title>
+{% endblock %}
+
+{% block content %}
+    <h1 class="mb-5">Calibration Curve</h1>
+
+    <form method="post">
+        <div class="analysis-boxes">
+            {% csrf_token %}
+            {% for elem in form %}
+                <div class="form-group">
+                    <label for="{{ elem.id_for_label }}">{{ elem.label }}</label>
+                    {% render_field elem|add_class:"form-control" %}
+                    <small id="emailHelp" class="form-text text-muted">{{ elem.help_text }}</small>
+                </div>
+            {% endfor %}
+
+            <div class="form-row text-right mt-3 mb-5">
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary mb-0">Run Analysis</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+{% endblock %}
+

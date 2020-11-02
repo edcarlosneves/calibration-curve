@@ -1,0 +1,44 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h4 class="mb-3">Saved Analyses</h4>
+    {% if analysis_list %}
+        <table class="table">
+            <thead class="black white-text">
+            <tr>
+                <th scope="col">Analysis Name</th>
+                <th scope="col">Analysis Substance</th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for analysis in analysis_list %}
+                <tr>
+                    <td>{{ analysis.analysis_name }} <a href="{{ analysis.get_absolute_url }}"><i
+                            class="fas fa-info-circle"></i></a></td>
+                    <td>
+                        {{ analysis.substance_name }}
+                    </td>
+
+                    <td>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <a href="{{ analysis.get_absolute_url }}/delete">
+                                    <i class="fas fa-trash-alt" style="color: orangered"></i>
+                                </a>
+                            </div>
+                            <div class="col-md-6">
+                                <a href="{{ analysis.get_absolute_url }}/update">
+                                    <i class="fas fa-user-edit" style="color: #0d47a1"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>There are no authors in the library.</p>
+    {% endif %}
+{% endblock %}
