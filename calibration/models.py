@@ -4,22 +4,24 @@ from django.urls import reverse
 
 class Analysis(models.Model):
     analysis_name = models.CharField(
-        "Analysis Name", max_length=200, help_text="Enter a name for you analysis"
+        "Nome da Análise",
+        max_length=200,
+        help_text="Digite um nome para identificar sua análise.",
     )
     substance_name = models.CharField(
-        "Substance Name",
+        "Nome da Substância",
         max_length=200,
-        help_text="Enter the name of the substance that you will analysis",
+        help_text="Digite o nome da substância que você está analisando.",
     )
     absorbance = models.CharField(
-        "Absorbance",
+        "Absobâncias",
         max_length=200,
-        help_text="Absorbance measured separated by commas.",
+        help_text="Valores das absorbâncias lidas separados por vírgula.",
     )
     concentration = models.CharField(
-        "Concentration",
+        "Concentrações",
         max_length=200,
-        help_text="Concentration measured separated by commas.",
+        help_text="Valores das concentrações para cada absorbância fornecida separados por vírgulas.",
     )
 
     class Meta:
