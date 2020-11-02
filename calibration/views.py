@@ -11,30 +11,34 @@ from calibration.forms import AnalysisForm
 @login_required
 def index(request):
     form = AnalysisForm(request.POST or None)
-    if request.method == 'POST':
+    if request.method == "POST":
         form = AnalysisForm(request.POST or None)
 
         if form.is_valid():
             form.save()
-            obj = Analysis.objects.latest('id')
-            print('print(obj)')
+            obj = Analysis.objects.latest("id")
+            print("print(obj)")
             print(obj)
-            analysis_name = form.cleaned_data['analysis_name']
-            substance_name = form.cleaned_data['substance_name']
-            absorbance = [float(data) for data in form.cleaned_data['absorbance'].split(',')]
-            concentration = [float(data) for data in form.cleaned_data['concentration'].split(',')]
+            analysis_name = form.cleaned_data["analysis_name"]
+            substance_name = form.cleaned_data["substance_name"]
+            absorbance = [
+                float(data) for data in form.cleaned_data["absorbance"].split(",")
+            ]
+            concentration = [
+                float(data) for data in form.cleaned_data["concentration"].split(",")
+            ]
             absorbance_concentration = list(zip(absorbance, concentration))
             context = {
-                'absorbance_concentration': absorbance_concentration,
-                'analysis_name': analysis_name,
-                'substance_name': substance_name,
+                "absorbance_concentration": absorbance_concentration,
+                "analysis_name": analysis_name,
+                "substance_name": substance_name,
             }
-            return render(request, 'report.html', context=context)
+            return render(request, "report.html", context=context)
     context = {
-        'form': form,
+        "form": form,
     }
 
-    return render(request, 'index.html', context=context)
+    return render(request, "index.html", context=context)
 
 
 class AnalysisListView(generic.ListView):
