@@ -14,7 +14,7 @@ class Analysis(models.Model):
         help_text="Digite o nome da substância que você está analisando.",
     )
     absorbance = models.CharField(
-        "Absobâncias",
+        "Absorbâncias",
         max_length=255,
         help_text="Valores das absorbâncias lidas separados por vírgula.",
     )
