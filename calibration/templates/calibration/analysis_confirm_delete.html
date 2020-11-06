@@ -1,10 +1,15 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-    <h1>Delete Analysis</h1>
-    <p>Are you sure you want to delete the Analysis: {{ analysis }}?</p>
-    <form action="" method="POST">
-        {% csrf_token %}
-        <input type="submit" value="Yes, delete.">
-    </form>
+    <div class="analysis-boxes">
+        <h1>Deletar Análise</h1>
+        <hr/>
+        <p>Você tem certeza que deseja excluir essa análise: <span class="font-weight-bold">{{ analysis }}</span>?</p>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <div class="form-row text-right mt-4">
+                <input type="submit" class="btn btn-danger" value="Sim, delete.">
+            </div>
+        </form>
+    </div>
 {% endblock %}
