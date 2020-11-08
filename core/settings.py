@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "calibration",
+    "accounts",
 ]
 
 MIDDLEWARE = [
@@ -123,3 +124,5 @@ USE_TZ = True
 STATIC_URL = "/static/"
 
 LOGIN_REDIRECT_URL = "/"
+
+AUTH_USER_MODEL = "accounts.User"
