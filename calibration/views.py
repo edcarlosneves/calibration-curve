@@ -35,7 +35,7 @@ def index(request):
                 "analysis_name": analysis_name,
                 "substance_name": substance_name,
             }
-            return render(request, "report.html", context=context)
+            return render(request, "calibration/report.html", context=context)
     return render(request, "index.html", context=context)
 
 
