@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+    <div class="report-boxes" style="max-width: 60%; margin:0 auto;">
+        <h1 align="center">Criar Conta</h1>
+        <hr class="mb-5">
+        <form method="post" action="{% url 'register' %}" class="mb-5">
+            {% csrf_token %}
+
+            <div class="form-row align-items-center mt-3">
+                <div class="col-md-10 offset-md-1">
+                    <div class="alert alert-danger" role="alert">
+                        {{ form.errors }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row align-items-center mt-3">
+                <div class="col-md-10 offset-md-1">
+                    <label for="{{ form.username.id_for_label }}">Nome de usuário</label>
+                    {% render_field form.username class="form-control" %}
+                </div>
+            </div>
+
+            <div class="form-row align-items-center mt-3">
+                <div class="col-md-10 offset-md-1">
+                    <label for="{{ form.email.id_for_label }}">Email</label>
+                    {% render_field form.email class="form-control" %}
+                </div>
+            </div>
+
+            <div class="form-row align-items-center mt-3">
+                <div class="col-md-10 offset-md-1">
+                    <label for="{{ form.password1.id_for_label }}">Senha</label>
+                    {% render_field form.password1 class="form-control" %}
+                    <small class="form-text text-muted">
+                        {{ form.password1.help_text }}
+                    </small>
+                </div>
+            </div>
+
+            <div class="form-row align-items-center mt-3">
+                <div class="col-md-10 offset-md-1">
+                    <label for="{{ form.password2.id_for_label }}">Confirmação de Senha</label>
+                    {% render_field form.password2 class="form-control" %}
+                    <small class="form-text text-muted">
+                        {{ form.password2.help_text }}
+                    </small>
+                </div>
+            </div>
+
+
+            <div class="form-row text-right mt-3">
+                <div class="col-md-10 offset-md-1">
+                    <input type="submit" class="btn btn-primary mb-0" value="Criar Conta">
+                </div>
+            </div>
+            <input type="hidden" name="next" value="{{ next }}"/>
+        </form>
+    </div>
+
+{% endblock %}
