@@ -25,7 +25,10 @@ class Analysis(models.Model):
         help_text="Valores das concentrações para cada absorbância fornecida separados por vírgulas.",
     )
     analyst = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=1
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        default=1,
+        verbose_name="Analista",
     )
 
     class Meta:
