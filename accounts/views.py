@@ -17,6 +17,4 @@ def register(request):
             return redirect(reverse("analyses"))
         else:
             point = 10
-            return render(
-                request, "accounts/register.html", {"form": form}
-            )
+            return render(request, "accounts/register.html", {"form": form})
