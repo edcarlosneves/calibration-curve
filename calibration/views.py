@@ -23,12 +23,22 @@ def index(request):
             if not obj:
                 form.save()
             substance_name = form.cleaned_data["substance_name"]
-            absorbance = [
-                float(data) for data in form.cleaned_data["absorbance"].split(",")
-            ]
-            concentration = [
-                float(data) for data in form.cleaned_data["concentration"].split(",")
-            ]
+
+            try:
+                absorbance = [
+                    float(data) for data in form.cleaned_data["absorbance"].split(",")
+                ]
+                concentration = [
+                    float(data)
+                    for data in form.cleaned_data["concentration"].split(",")
+                ]
+            except ValueError:
+                messages.warning(
+                    request,
+                    "Existe(m) erro(s) nos inputs de absorbâncias e/ou concentrações.",
+                )
+                return render(request, "index.html", context=context)
+
             absorbance_concentration = list(zip(absorbance, concentration))
             context = {
                 "absorbance_concentration": absorbance_concentration,

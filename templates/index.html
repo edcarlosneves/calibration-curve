@@ -9,6 +9,19 @@
 
     <form method="post">
         <div class="analysis-boxes">
+
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="form-row align-items-center">
+                        <div class="col-md-8 offset-md-2">
+                            <div class="alert alert-danger" role="alert">
+                                {{ message }}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+
             {% csrf_token %}
             {% for elem in form %}
                 <div class="form-group">
