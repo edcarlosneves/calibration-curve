@@ -131,3 +131,4 @@ dmypy.json
 .idea/
 .vscode/
 migrations/
+calibration/static/charts/

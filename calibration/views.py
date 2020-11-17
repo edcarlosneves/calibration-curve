@@ -7,6 +7,7 @@ from django.urls import reverse_lazy
 
 from calibration.models import Analysis
 from calibration.forms import AnalysisForm
+from utils.calibration_curve import CalibrationCurve
 
 
 @login_required
@@ -40,6 +41,10 @@ def index(request):
                 return render(request, "index.html", context=context)
 
             absorbance_concentration = list(zip(absorbance, concentration))
+
+            calibration_curve = CalibrationCurve(absorbance, concentration)
+            calibration_curve.plot()
+
             context = {
                 "absorbance_concentration": absorbance_concentration,
                 "analysis_name": analysis_name,
