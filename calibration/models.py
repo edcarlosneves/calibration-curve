@@ -4,6 +4,13 @@ from django.conf import settings
 
 
 class Analysis(models.Model):
+    CONCENTRATION_UNIT_CHOICES = [
+        ("mg/l", "mg/l"),
+        ("g/l", "g/l"),
+        ("mg/ml", "mg/ml"),
+        ("mol/l", "mol/l"),
+    ]
+
     analysis_name = models.CharField(
         "Nome da Análise",
         max_length=255,
@@ -24,6 +31,15 @@ class Analysis(models.Model):
         max_length=255,
         help_text="Valores das concentrações para cada absorbância fornecida separados por vírgulas.",
     )
+
+    concentration_units = models.CharField(
+        "Unidades das Concentrações",
+        max_length=255,
+        help_text="Valores das unidades das concentrações.",
+        choices=CONCENTRATION_UNIT_CHOICES,
+        default="mg/l",
+    )
+
     analyst = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
