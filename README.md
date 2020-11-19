@@ -1,4 +1,4 @@
-# Calirabration Curve
+# Calibration Curve
 Projeto em Django para a construção de curvas de calibração
 para aplicação em Química Analítica.
 
