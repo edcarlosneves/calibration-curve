@@ -3,9 +3,10 @@ import matplotlib.pyplot as plt
 
 
 class CalibrationCurve:
-    def __init__(self, absorbance, concentration):
+    def __init__(self, absorbance, concentration, concentration_unit):
         self._absorbance = absorbance
         self._concentration = concentration
+        self._concentration_unit = concentration_unit
         self._coefficients = np.polyfit(self.absorbance, self.concentration, 1)
 
     @property
@@ -48,8 +49,8 @@ class CalibrationCurve:
         plt.plot(absorbance, concentration_curve, label=f"{str(self)}")
         plt.plot(absorbance, concentration_lab, "ro", label="lab data")
         plt.xlabel("absorbance")
-        plt.ylabel("concentration (mg/L)")
-        plt.title("concentration (mg/L) x absorbance")
+        plt.ylabel(f"concentration ({self._concentration_unit})")
+        plt.title(f"concentration ({self._concentration_unit}) x absorbance")
         plt.legend()
         plt.savefig("calibration/static/charts/analysis.png", transparent=True)
         plt.close()

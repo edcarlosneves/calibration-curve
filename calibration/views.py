@@ -40,15 +40,20 @@ def index(request):
                 )
                 return render(request, "index.html", context=context)
 
+            concentration_unit = form.cleaned_data["concentration_units"]
+
             absorbance_concentration = list(zip(absorbance, concentration))
 
-            calibration_curve = CalibrationCurve(absorbance, concentration)
+            calibration_curve = CalibrationCurve(
+                absorbance, concentration, concentration_unit
+            )
             calibration_curve.plot()
 
             context = {
                 "absorbance_concentration": absorbance_concentration,
                 "analysis_name": analysis_name,
                 "substance_name": substance_name,
+                "concentration_unit": concentration_unit,
             }
             return render(request, "calibration/report.html", context=context)
     return render(request, "index.html", context=context)
