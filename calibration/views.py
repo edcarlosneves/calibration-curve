@@ -1,10 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.views import generic
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 
+from accounts.models import User
 from calibration.models import Analysis
 from calibration.forms import AnalysisForm
 from utils.calibration_curve import CalibrationCurve
@@ -20,9 +22,12 @@ def index(request):
         form = AnalysisForm(request.POST or None)
         if form.is_valid():
             analysis_name = form.cleaned_data["analysis_name"]
-            obj = Analysis.objects.filter(analysis_name=analysis_name)
+            analyst = request.user
+            obj = Analysis.objects.filter(analysis_name=analysis_name, analyst=analyst)
             if not obj:
-                form.save()
+                analysis = form.save(commit=False)
+                analysis.analyst = analyst
+                analysis.save()
             substance_name = form.cleaned_data["substance_name"]
 
             try:
@@ -59,20 +64,23 @@ def index(request):
     return render(request, "index.html", context=context)
 
 
-class AnalysisListView(generic.ListView):
-    model = Analysis
+class AnalysisListView(LoginRequiredMixin, generic.ListView):
     paginate_by = 10
 
+    def get_queryset(self):
+        self.analyst = self.request.user
+        return Analysis.objects.filter(analyst=self.analyst)
 
-class AnalysisUpdate(UpdateView):
+
+class AnalysisUpdate(LoginRequiredMixin, UpdateView):
     model = Analysis
     fields = "__all__"
 
 
-class AnalysisDetailView(generic.DetailView):
+class AnalysisDetailView(LoginRequiredMixin, generic.DetailView):
     model = Analysis
 
 
-class AnalysisDelete(DeleteView):
+class AnalysisDelete(LoginRequiredMixin, DeleteView):
     model = Analysis
     success_url = reverse_lazy("analyses")
