@@ -10,6 +10,7 @@ django-widget-tweaks = "*"
 matplotlib = "*"
 numpy = "*"
 Django = "*"
+ipython = "*"
 
 [requires]
 python_version = "3.8"
