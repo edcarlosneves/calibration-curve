@@ -61,9 +61,11 @@
                 <li class="nav-item avatar dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="false">
-                        <img src="https://avatars1.githubusercontent.com/u/12738305?s=460&u=7d429fbbf0c4c289fb4a469a680a6a51dd49fb5f&v=4"
-                             class="rounded-circle z-depth-0"
-                             alt="avatar image" style="height: 30px;">
+                        {% if user.first_name and user.last_name %}
+                            {{ user.first_name }} {{ user.last_name }}
+                        {% else %}
+                            {{ user.username }}
+                        {% endif %}
                     </a>
                     <div class="dropdown-menu dropdown-menu-lg-right dropdown-secondary"
                          aria-labelledby="navbarDropdownMenuLink-55">
