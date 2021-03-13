@@ -74,7 +74,13 @@ class AnalysisListView(LoginRequiredMixin, generic.ListView):
 
 class AnalysisUpdate(LoginRequiredMixin, UpdateView):
     model = Analysis
-    fields = "__all__"
+    fields = [
+        "analysis_name",
+        "substance_name",
+        "absorbance",
+        "concentration",
+        "concentration_units",
+    ]
 
 
 class AnalysisDetailView(LoginRequiredMixin, generic.DetailView):
