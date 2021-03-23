@@ -82,11 +82,23 @@ class AnalysisUpdate(LoginRequiredMixin, UpdateView):
         "concentration_units",
     ]
 
+    def get_queryset(self):
+        qs = super().get_queryset()
+        return qs.filter(analyst=self.request.user)
+
 
 class AnalysisDetailView(LoginRequiredMixin, generic.DetailView):
     model = Analysis
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        return qs.filter(analyst=self.request.user)
 
 
 class AnalysisDelete(LoginRequiredMixin, DeleteView):
     model = Analysis
     success_url = reverse_lazy("analyses")
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        return qs.filter(analyst=self.request.user)
